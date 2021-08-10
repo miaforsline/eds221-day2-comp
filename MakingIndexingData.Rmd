@@ -1,0 +1,118 @@
+---
+title: "making & indexing data in R"
+author: "Mia Forsline"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(palmerpenguins)
+library(tidyverse)
+```
+
+## Make some vectors and check them out
+```{r}
+dogs <- c("teddy", 40, TRUE, 67L)
+dogs
+
+#check the class
+class(dogs)
+```
+
+```{r}
+dog_age <- c(1.4, 5.2, 6, 10)
+
+class(dog_age)
+#more specific class 
+typeof(dog_age)
+
+dog_miles <- c(4L, 5L, 6L)
+class(dog_miles)
+#`typeof` might return the same output as `class`
+typeof(dog_miles)
+
+#query the class using unit tests 
+is.character(dog_miles)
+is.numeric(dogs)
+```
+
+```{r}
+#name vector elements 
+dog_food <- c(teddy = "purina", 
+              khora = "alpo", 
+              waffle = "fancy feast",
+              banjo = "blue diamond")
+dog_food
+class(dog_food)
+
+khora_food <- dog_food[2] 
+dog_food["khora"]
+
+dog_size <- c(teddy = 50, khora = 55)
+test <- 6 + dog_size[2]
+```
+
+```{r}
+cars <- c("red", "white", "yellow", "silver", "blue", "black", "purple", "green", "gray")
+#evaluate multiple values within the vector 
+cars[2:5]
+
+#can call vector elements using i 
+i <- 3
+cars[i]
+
+i <- c(1, 5, 7)
+cars[i]
+
+#mutability 
+cars[3] <- "BURRITOS"
+```
+## Lists in R
+```{r}
+#vectors are homogenous (every element has the same class)
+#lists are heterogenous (can have multiple classes)
+urchins <- list("blue", 
+                c(1, 2, 3), 
+                seq(from = 0, to = 50, by = 0.5),
+                1200L)
+urchins
+
+urchins[[1]] #returns the contents of the element 
+urchins[1] #returns the same class as the original (in this case, a list)
+```
+
+```{r}
+#list elements have the ame length = similar to a data frame 
+tacos <- list(topping = c("onion", "cilantro", "guac"),
+              filling = c("beans", "meat", "veggies"),
+              price = c(6.75, 8.25, 9.50))
+tacos
+
+#refer to individual elements
+taco_price <- tacos[[3]]
+taco_price
+
+taco_filling <- tacos$filling
+```
+
+## Data Frames
+```{r}
+#similar set up to making a list 
+fruit <- data.frame( type = c("apple", "banana", "peach"),
+                     mass = c(130, 196, 150))
+fruit
+class(fruit$type)
+typeof(fruit)
+
+#view individual elements
+#[[row, column]]
+fruit[[2,2]]
+fruit$type[[2]]
+
+#get values from entire column 1 
+fruit[,1]
+
+
+```
+
